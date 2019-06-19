@@ -1,35 +1,33 @@
 <template>
-  <div>
-    <section class="form">
-      <div class="field">
-        <label class="label">Search for a car brand</label>
-        <div class="input">
-          <input type="text" v-model='query' @input='lookupQuery' @change="saveQuery" placeholder="Search..." :key="componentKey"/>
-          <div class="button" @click="saveQuery"><i class="fas fa-search"></i></div>
-        </div>
-        <div class="hits" v-bind:class="{'open': hitList}">
-          <ul class="dropdown-menu">
-            <li v-for='brands in matches'	v-bind:key="brands">
-              <a v-bind:href="brands">{{ brands }}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="history" v-if="history.length >= 1">
-          <div class="history_header">
-            <div class="history_header_text">Search history</div>
-            <div class="button" @click="clearHistory">Clear</div>
-          </div>
-          <ul>
-            <li v-for="savedQuery in history" :disabled="!savedQuery" v-bind:key="savedQuery.id" v-bind:value="savedQuery.query" >
-              <div class="history_query">{{ savedQuery.query }}</div>
-              <div class="history_timestamp">{{ savedQuery.timestamp }}</div>
-              <div class="button" v-bind:value="savedQuery.id" @click="deleteQuery"><i class="fas fa-times"></i></div>
-            </li>
-          </ul>
-        </div>
+  <section class="form">
+    <div class="field">
+      <label class="label">Search for a car brand</label>
+      <div class="input">
+        <input type="text" v-model='query' @input='lookupQuery' @change="saveQuery" title="Start typing a car brand" placeholder="Search..." :key="componentKey"/>
+        <div class="button" @click="saveQuery" title="Execute search"><i class="fas fa-search"></i></div>
       </div>
-    </section>
-  </div>
+      <div class="hits" v-bind:class="{'open': hitList}">
+        <ul class="dropdown-menu">
+          <li v-for='brands in matches'	v-bind:key="brands" v-bind:title="'Select ' + brands">
+            <a v-bind:href="brands">{{ brands }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="history" v-if="history.length >= 1">
+        <div class="history_header">
+          <div class="history_header_text">Search history</div>
+          <div class="button" @click="clearHistory">Clear</div>
+        </div>
+        <ul>
+          <li v-for="savedQuery in history" :disabled="!savedQuery" v-bind:key="savedQuery.id" v-bind:value="savedQuery.query" >
+            <div class="history_query">{{ savedQuery.query }}</div>
+            <div class="history_timestamp">{{ savedQuery.timestamp }}</div>
+            <div class="button" v-bind:value="savedQuery.id" @click="deleteQuery"><i class="fas fa-times"></i></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </template>
   
 <script>

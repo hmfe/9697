@@ -1,16 +1,12 @@
 <template>
   <div id="search_box">
-    <SearchBox/>
+    <SearchBox />
   </div>
 </template>  
 <script>
   import SearchBox from "./SearchBox"
   export default {
     components: { SearchBox },
-    data() {
-      return {
-      }
-    }
   }
 </script>
 <style>
